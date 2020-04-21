@@ -1,0 +1,27 @@
+<html>
+
+<head>
+  <title>Welcome to Vue</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+  <div id="account">
+    금액 :
+    <input type="text" v-model="amount">
+    <h2 v-if="amount < 0">금액은 0 이하를 입력하실 수 없습니다.</h2>
+    <h2 v-show="amount < 0">금액은 0 이하를 입력하실 수 없습니다.</h2>
+  </div>
+
+  <script>
+    var simple1 = new Vue({
+      el: '#account',
+      data: {
+        amount: 0
+      }
+    })
+  </script>
+</body>
+
+</html>
