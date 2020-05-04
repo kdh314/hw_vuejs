@@ -5,16 +5,27 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <style>
         div#app {
+            padding: 50px;
             margin: 30px auto;
+            max-width: 300px;
         }
 
+
         div#squre {
-            margin: 30px;
-            padding: 30px;
+            margin: 3px;
+            padding: 3px;
+            max-width: 200px;
+            height: 200px;
             background-color: #ffa;
             border: 1px solid gray;
             text-align: center;
             font-size: 20pt;
+        }
+
+        button {
+            padding: 0.5em 2em;
+            margin: 10px 0px 5px 10px;
+            font-size: 9pt;
         }
     </style>
 </head>
@@ -23,7 +34,7 @@
     <div id="app">
         <button type="button" v-on:click="show" v-bind:disabled="val">보이기</button>
         <button type="button" v-on:click="hide" v-bind:disabled="!val">감추기</button>
-        <div id="squre" v-show="visible">aaa</div>
+        <div id="squre" v-show="val"></div>
     </div>
     <script type="text/javascript">
         var app = new Vue({
@@ -33,10 +44,10 @@
             },
             methods: {
                 show: function () {
-                    
+                    this.val = true;
                 },
                 hide: function () {
-                    
+                    this.val = false;
                 }
             }
         })

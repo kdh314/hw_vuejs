@@ -1,0 +1,43 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        function random(min, max) {
+          min = Math.ceil(min);
+          max = Math.floor(max);
+          return Math.floor(Math.random() * (max - min)) + min;
+        }
+      </script>
+    <style>
+        div#app {
+            margin: 30px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="value" />
+        <button type="button" v-on:click="generate">생성</button>
+        <span v-for="value in values">
+            {{value}}
+        </span>
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                values: []
+            },
+            methods: {
+                generate: function () {
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
