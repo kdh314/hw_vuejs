@@ -4,13 +4,11 @@ function random(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function callback(a, b) {
-    if ( a % 2 != 0 && b % 2 != 0)
-
-    console.log(a + ", " + b);
-    return a + b;
+function odd_accumlator(accum, current) {
+    if (current % 2 == 0)
+        accum += current;
+    return accum;
 }
-
 
 let array = [];
 for (let i = 0; i < 100; i++)
@@ -18,6 +16,6 @@ for (let i = 0; i < 100; i++)
 
 console.log(array);
 
-let sum = array.reduce(callback);
+let sum = array.reduce(odd_accumlator);
 
 console.log(sum)
