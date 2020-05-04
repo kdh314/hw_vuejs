@@ -19,6 +19,8 @@ function test_sum(cb) {
     for (let i = 0; i < 5; i++)
         arr.push(random(0, 11));
 
+    console.log("Random: " + arr);
+    console.log("Total: " + cb(arr));
 }
 
 for (let i = 0; i < 5; i++)
