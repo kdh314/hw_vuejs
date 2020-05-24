@@ -17,8 +17,8 @@
     <div id="app">
         <h1>할 일</h1>
         <ul>
-            <li v-for="(todo, key) in todoMap">
-                <input type="checkbox" v-model="checked[index]" />
+            <li v-for="(todo, i, index) in todoMap">
+                <input type="checkbox" v-model="checked[i]" />
                 {{ todo }}
             </li>
         </ul>
@@ -51,7 +51,7 @@
                     //   this.todo = "";
 
                     //신규 data 등록 요청
-                    axios.post('https://skhu-kdh.firebaseio.com/todo11.json', "\"" + this.todo)
+                    axios.post('https://skhu-kdh.firebaseio.com/todo11.json', "\"" + this.todo + "\"")
                         .then(response => this.reload());
                     this.todo = "";
                 },
