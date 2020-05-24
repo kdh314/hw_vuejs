@@ -1,0 +1,86 @@
+<!--조회 저장 삭제-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="todo1.css">
+    <style>
+        ul {
+            list-style-type: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>할 일</h1>
+        <ul>
+            <li v-for="(todo, key) in todoMap">
+                <input type="checkbox" v-model="checked[index]" />
+                {{ todo }}
+            </li>
+        </ul>
+        <input type="text" v-model.trim="todo" />
+        <button type="button" v-on:click="addTodo" v-bind:disabled="!todo">할일 추가</button>
+        <button type="button" v-on:click="deleteTodo" v-show="checkedCount > 0">삭제</button>
+    </div>
+
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#app',
+            data: {
+                todoMap: {},
+                checked: {},
+                todo: ""
+
+            },
+            computed: {
+                checkedCount: function () {
+                    let count = 0;
+                    for (let i in this.checked)
+                        if (this.checked[i]) ++count;
+                    return count;
+                }
+            },
+            methods: {
+                addTodo: function () {
+                    //   this.todoMap.push(this.todo);
+                    //   this.todo1Ref.set(this.todoMap);
+                    //   this.todo = "";
+
+                    //신규 data 등록 요청
+                    axios.post('https://skhu-kdh.firebaseio.com/todo11.json', "\"" + this.todo)
+                        .then(response => this.reload());
+                    this.todo = "";
+                },
+                reload: function () {
+                    axios.get('https://skhu-kdh.firebaseio.com/todo11.json')
+                        .then(response => this.todoMap = response.data);
+                },
+
+                deleteTodo: function () {
+                    for (let i in this.checked){
+                        if (this.checked[i]) { 
+                    //data 삭제 요청
+                    axios.delete('https://skhu-kdh.firebaseio.com/todo11/' + i + '.json')
+                        .then(response => this.reload());
+                }
+                    }
+                this.checked = {};
+            }
+        }
+        })
+
+        window.onload = function () {
+            app.reload();
+            //   app.todo1Ref = firebase.database().ref("todo1");
+            //   app.todo1Ref.on('value', (snapshot) => {
+            //     app.todoMap  = snapshot.val();
+            //  });
+        }
+    </script>
+</body>
+
+</html>
